@@ -19,27 +19,19 @@ class OnlineSalesRegisterCollector:
     
 #2
     def add_item_to_cheque(self, name):
-        try:
             if len(name) == 0 or len(name) > 40:
                 raise ValueError('Нельзя добавить товар, если в его названии нет символов или их больше 40')
             if name not in self.__item_price:
                 raise NameError('Позиция отсутствует в товарном справочнике')
             self.__name_items.append(name)
             self.__number_items += 1
-        except ValueError:
-            print('Нельзя добавить товар, если в его названии нет символов или их больше 40')
-        except NameError:
-            print('Позиция отсутствует в товарном справочнике')
 
  #3                                   
     def delete_item_from_check(self, name):
-        try: 
             if name not in self.__name_items:
                 raise NameError('Позиция отсутствует в чеке')
             self.__name_items.remove(name)
             self.__number_items -= 1
-        except NameError:
-            print('Позиция отсутствует в чеке')
 
 #4
     def check_amount(self):
@@ -94,13 +86,8 @@ class OnlineSalesRegisterCollector:
 #8
     @staticmethod
     def get_telephone_number(telephone_number):
-        try:
-            telephone_number_int = int(telephone_number)
-            if telephone_number_int != telephone_number:
-                raise ValueError('Необходимо ввести цифры')
-            if len(str(telephone_number)) > 10:
-                raise ValueError('Необходимо ввести 10 цифр после "+7"')
-            return f"+7{telephone_number}"
-        except ValueError as e:
-            print(e)
-            
+        if type(telephone_number) != int:
+            raise ValueError('Необходимо ввести цифры')
+        if len(str(telephone_number)) > 10:
+            raise ValueError('Необходимо ввести 10 цифр после "+7"')
+        return f"+7{telephone_number}"
